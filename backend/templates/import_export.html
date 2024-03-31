@@ -66,6 +66,12 @@
             chart.draw(data, options);
         }
 
+        window.onload = function() {
+            // Initially display only the pie chart
+            document.getElementById('piechart').style.display = 'block';
+            document.getElementById('piechart').style.display = 'none';
+        };
+
         function showChart(chartType) {
             var pieButton = document.getElementById('pieButton');
             var sankeyButton = document.getElementById('sankeyButton');
@@ -78,8 +84,8 @@
                 pieButton.classList.add('active');
                 sankeyButton.classList.remove('active');
             } else if (chartType === 'sankey_basic') {
-                sankeyBasic.style.display = 'block';
                 piechart.style.display = 'none';
+                sankeyBasic.style.display = 'block'; 
                 sankeyButton.classList.add('active');
                 pieButton.classList.remove('active');
             }
@@ -106,17 +112,21 @@
             <button id="sankeyButton" class="chartButton" onclick="showChart('sankey_basic')">Sankey Diagram</button><br><br>
     
             <div style="display: flex;">
-                <div>
-                    <div id="piechart" style="width: 700px; height: 400px; border: 1px solid black;"></div>
-                    <div id="sankey_basic" style="width: 700px; height: 400px; border: 1px solid black;"></div>
+                <div style="width: 70%;">
+                    <div id="piechart" style="width: 100%; height: 400px; border: 1px solid black;"></div>
+                    <div id="sankey_basic" style="width: 100%; height: 400px; border: 1px solid black;"></div>
                 </div>
-
-                <div id="annotationsDiv" style="margin-left: 20px; border: 1px solid black; width: 400px; display: none; outline: none;">
-                    <h1 style="margin-top: 2%; margin-left: 2%;">Annotations</h1>
-                    <textarea id="annotationsTextarea" style="width: 100%; height: 60%; font-size: large;"></textarea>
-                    <button id="saveButton" onclick="saveAnnotations()" class="annotationsButton">Save</button>
-                    <button id="loadButton" onclick="loadAnnotations()" class="annotationsButton">Load</button>
-                    <button id="clearButton" onclick="clearAnnotations()" class="annotationsButton">Clear</button>   
+            
+                <div style="width: 30%; margin-left: 20px;">
+                    <h1 style="margin-top: 0; margin-bottom: 20px;">Annotations</h1>
+                    <div style="border-radius: 5px; overflow: hidden;">
+                        <textarea id="annotationsTextarea" style="width: 100%; height: 200px; font-size: 16px; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc;"></textarea>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <button id="saveButton" onclick="saveAnnotations()" class="annotationsButton" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+                        <button id="loadButton" onclick="loadAnnotations()" class="annotationsButton" style="background-color: #2196F3; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Load</button>
+                        <button id="clearButton" onclick="clearAnnotations()" class="annotationsButton" style="background-color: #f44336; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Clear</button>   
+                    </div>
                 </div>
             </div>
         </section>
