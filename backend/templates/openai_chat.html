@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with GPT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/openai.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/UNICEF_logo_2.png') }}" alt="Logo" class="header-logo">
+        </div>
+        <h2>Macroeconomic Researcher Food Security Time Series and Large Language Chat GPT Dashboard</h2>
+    </header>
+    <main>
+        <section id="content">
+            <div id="chat-interface">
+                <div id="chat-box">
+                    <!-- Chat messages will appear here -->
+                </div>
+                <form id="chat-form">
+                    <input type="text" id="message" placeholder="Type your message here..." autocomplete="off">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/openai_chat.js') }}"></script>
+</body>
+</html>

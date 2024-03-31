@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h1> Food Security and Nutrition Dashboard</h1>
+        <p>Select your role to log in:</p>
+        <div class="role-selection">
+            <button id="researcher-login" onclick="roleSelected('researcher')">Economic Researcher</button>
+            <button id="official-login" onclick="roleSelected('official')">Government Official</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/role_selection.js') }}"></script>
+</body>
+</html>

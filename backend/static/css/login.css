@@ -1,0 +1,63 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 360px;
+    padding: 2rem;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.login-container h1 {
+    color: #000;
+    margin-bottom: 1rem;
+}
+
+.role-selection button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.role-selection button:hover {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Glow effect on button click */
+.role-selection button:active {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect for all buttons */
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* After the button click, it comes back to its original place */
+button:active {
+    transform: translateY(1px);
+}

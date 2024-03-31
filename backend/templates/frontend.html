@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <style>
+        /* Custom styles for the flag icons */
+        .selected-flag:before {
+            display: inline-block;
+            font-family: 'flag-icon-css';
+            margin-right: 5px;
+        }
+        
+        /* Custom styles for positioning */
+        .select-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .select-flag {
+            font-size: 22px;
+            padding-left: 30px; /* Adjust spacing for the flag */
+        }
+        
+        .selected-flag {
+            position: absolute;
+            left: 5px; /* Adjust position as needed */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        footer {
+            border: 1px solid black;
+            text-align: center;
+            margin-bottom: 1%;
+            height: 10%;
+            width: 98.5%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        /* Collapsible list styles */
+        .collapsible {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .collapsible > li {
+            margin-bottom: 10px;
+        }
+
+        .collapsible .sub-list {
+            display: none;
+            margin-left: 20px;
+        }
+
+        .collapsible .sub-list li {
+            margin-bottom: 5px;
+        }
+
+        .collapsible .sub-list li:first-child {
+            font-weight: bold;
+        }
+
+        .collapsible .expand {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header style="border: 1px solid black; font-size: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <div class="logo-container">
+            <img src="UNICEF_logo_2.png" alt="Logo" style="max-width: 100px; height: auto; margin-left: 10%;">
+        </div>
+        <h1 style="margin: 0 auto;">Macroeconomic Researcher Food Security Time Series and Large Language Chat GPT Dashboard</h1>
+        <div class="select-container" style="margin-right: 3%;">
+            <span id="selected_flag" class="selected-flag"></span>
+            <select id="country_select" class="select-flag" onchange="showFlag()">
+                <option value="China" data-icon="cn">China</option>
+                <option value="India" data-icon="in">India</option>
+                <option value="USA" data-icon="us">USA</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Left side div for lists -->
+    <div id="left_div" style="padding-top: 20px; border: 1px solid black; width:20%; height:462px">
+        <ul class="collapsible">
+            <li>
+                <span class="expand" onclick="toggleSubList(this)" style="margin-left: 5%;">Macroeconomic (USD)</span>
+                <ul class="sub-list">
+                    <input type="checkbox" id="gdp"><label for="gdp">GDP (USD)</label><br>
+                    <input type="checkbox" id="fdi_inflows"><label for="fdi_inflows">FDI Inflows (USD)</label><br>
+                    <input type="checkbox" id="fdi_outflows"><label for="fdi_outflows">FDI Outflows (USD)</label><br>
+                </ul>
+            </li>
+            <li>
+                <span class="expand" onclick="toggleSubList(this)" style="margin-left: 5%;">Agricultural</span>
+                <ul class="sub-list">
+                    <input type="checkbox" id="contribution_agri"><label for="contribution_agri">Contribution of Agri (% GDP)</label><br>
+                    <input type="checkbox" id="fertilizers"><label for="fertilizers">Fertilizers</label><br>
+                    <input type="checkbox" id="credit"><label for="credit">Credit</label><br>
+                    <input type="checkbox" id="fertilizers_prod"><label for="fertilizers_prod">Fertilizers PROD Fertilizers Pro</label>
+                </ul>                
+            </li>
+            <li>
+                <span class="expand" onclick="toggleSubList(this)" style="margin-left: 5%;">Debt Services</span>
+                <ul class="sub-list">
+                    <input type="checkbox" id="reserves"><label for="reserves">Reserves</label><br>
+                    <input type="checkbox" id="gni"><label for="gni">GNI</label><br>
+                    <input type="checkbox" id="total_debt"><label for="total_debt">Total Debt (%)</label>
+                </ul>                
+            </li>
+        </ul>
+    </div>
+
+    <footer>
+        <h1>Footer</h1>
+    </footer>
+
+    <script>
+        function showFlag() {
+            var select = document.getElementById("country_select");
+            var selectedOption = select.options[select.selectedIndex];
+            var selectedFlag = selectedOption.getAttribute("data-icon");
+
+            var flagElement = document.getElementById("selected_flag");
+            flagElement.className = "selected-flag flag-icon flag-icon-" + selectedFlag;
+        }
+
+        function toggleSubList(element) {
+            var subList = element.nextElementSibling;
+            subList.style.display = (subList.style.display === "none" || subList.style.display === "") ? "block" : "none";
+        }
+    </script>
+</body>
+</html>
