@@ -11,28 +11,59 @@
         <div class="logo-container">
             <img src="{{ url_for('static', filename='images/UNICEF_logo_2.png') }}" alt="Logo" class="header-logo">
         </div>
-        <h2>Macroeconomic Researcher Food Security Time Series and Large Language Chat GPT Dashboard</h2>
-        <div class="select-container">
-            <select id="country_select" class="select-flag">
+        <h3>Macroeconomic Researcher Food Security Time Series and Large Language Chat GPT Dashboard</h3>
+        <!-- <div class="select-container">
+            <select id="hidden-select" name="country" style="display: none;">
                 <option value="cn">China</option>
-                <option value="in">India</option>
+                <option value="in" selected>India</option>
                 <option value="us">USA</option>
             </select>
-        </div>
+            <div class="custom-select" id="country_select">
+                <span class="current-option">India</span>
+                <div class="custom-options">
+                    <div data-value="cn">China</div>
+                    <div data-value="in">India</div>
+                    <div data-value="us">USA</div>
+                </div>
+            </div>
+        </div> -->
+        <div class="select-container">
+            <select id="hidden-select" name="country" style="display: none;">
+                <option value="cn">China</option>
+                <option value="in" selected>India</option>
+                <option value="us">USA</option>
+            </select>
+            <div class="custom-select" id="country_select">
+                <span class="current-option">India <img src="{{ url_for('static', filename='images/india_flag.png') }}" alt="India Flag" style="height:20px;"></span>
+                <div class="custom-options">
+                    <div data-value="cn">China <img src="{{ url_for('static', filename='images/china_flag.png') }}" alt="China Flag" style="height:20px;"></div>
+                    <div data-value="in">India <img src="{{ url_for('static', filename='images/india_flag.png') }}" alt="India Flag" style="height:20px;"></div>
+                    <div data-value="us">USA <img src="{{ url_for('static', filename='images/us_flag.png') }}" alt="USA Flag" style="height:20px;"></div>
+                </div>
+            </div>
+        </div>        
     </header>
     <main>
         <aside>
             <nav>
                 <ul class="collapsible">
-                    <li><a href="/macroeconomics">Macroeconomic (USD)</a></li>
-                    <li><a href="/agricultural">Agricultural</a></li>
-                    <li><a href="/debt-services">Debt Services</a></li>
-                    <!-- Additional sidebar content can be added here -->
+                    <li>
+                        <span class="expand" data-category="macroeconomics">Macroeconomic (USD)</span>
+                    </li>
+                    <li>
+                        <span class="expand" data-category="agricultural">Agricultural</span>
+                    </li>
+                    <li>
+                        <span class="expand" data-category="debt-services">Debt Services</span>
+                    </li>
+                    <li>
+                        <span class="expand" data-category="import-export">Import/Export Flow</span>
+                    </li>
                 </ul>
             </nav>
         </aside>
         <section id="content">
-            <!-- Main content goes here -->
+            <iframe id="pdfViewer" src="{{ url_for('static', filename='/data/SOFI-2023.pdf') }}#page=1" frameborder="0" width="100%" height="100%"></iframe>
         </section>
     </main>
     <footer>
@@ -40,12 +71,79 @@
             <img src="{{ url_for('static', filename='images/chat_gpt_logo.jpg') }}" alt="ChatGPT Logo" class="footer-logo">
         </a>
     </footer>
+    <script src="{{ url_for('static', filename='js/openai_chat.js') }}"></script>
     <script>
+        function updateLocalStorage(countryCode) {
+            localStorage.setItem('selectedCountry', countryCode);
+        }
+
+        function loadContentForCategory(countryCode, category) {
+            if (category === "import-export") {
+                window.location.href = "/import_export";
+            } else {
+                window.location.href = `/get_content/${countryCode}/${category}`;
+            }
+        }
+
+        function setupListeners() {
+            const countrySelect = document.getElementById('country_select');
+            countrySelect.addEventListener('change', () => updateLocalStorage(countrySelect.value));
+
+            const categories = document.querySelectorAll('.expand');
+            
+            categories.forEach(category => {
+                category.addEventListener('click', () => {
+                    const countryCode = localStorage.getItem('selectedCountry');
+                    const categoryData = category.getAttribute('data-category');
+                    loadContentForCategory(countryCode, categoryData);
+                });
+            });
+        }
+
         window.onload = function() {
-            // Session storage role check and additional functionality can be implemented here
+            setupListeners();
+            const defaultCountry = 'in';
+            localStorage.setItem('selectedCountry', defaultCountry);
         };
-        // The JavaScript functions for flag selection and list toggling
-        // These should be defined based on your specific needs
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var customSelect = document.getElementById('country_select');
+            var customOptions = customSelect.querySelector('.custom-options');
+            var currentOption = customSelect.querySelector('.current-option');
+            var hiddenSelect = document.getElementById('hidden-select');
+    
+            // Set the initial display of the current option with the flag
+            var selectedOptionDiv = customOptions.querySelector(`div[data-value="${hiddenSelect.value}"]`);
+            if (selectedOptionDiv) {
+                currentOption.innerHTML = selectedOptionDiv.innerHTML; // Use innerHTML instead of textContent
+            }
+    
+            customSelect.addEventListener('click', function() {
+                customOptions.style.display = customOptions.style.display === 'block' ? 'none' : 'block';
+            });
+        
+            customOptions.querySelectorAll('div').forEach(function(optionDiv) {
+                optionDiv.addEventListener('click', function() {
+                    var value = optionDiv.getAttribute('data-value');
+                    hiddenSelect.value = value;
+                    currentOption.innerHTML = optionDiv.innerHTML; // Use innerHTML to include the flag
+                    customOptions.style.display = 'none';
+                    updateLocalStorage(value);
+                    event.stopPropagation();
+                });
+            });
+        
+            document.addEventListener('click', function(event) {
+                if (!customSelect.contains(event.target)) {
+                    customOptions.style.display = 'none';
+                }
+            });
+        });
+    
+        function updateLocalStorage(countryCode) {
+            localStorage.setItem('selectedCountry', countryCode);
+        }        
     </script>
 </body>
 </html>

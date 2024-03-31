@@ -65,7 +65,7 @@ nav ul li {
     font-size: 1.1em; 
 }
 
-nav ul li a {
+nav ul li a, nav ul li span {
     display: block;
     padding: 10px 15px; 
     color: #ccc; 
@@ -73,41 +73,40 @@ nav ul li a {
     transition: all 0.3s ease;
 }
 
-nav ul li a:hover, nav ul li a:focus {
-    background-color: #333; 
+nav ul li a:hover, nav ul li a:focus, nav ul li span:hover, nav ul li span:focus {
+    background-color: #333;
+    cursor: pointer; 
     color: #fff; 
     border-left: 5px solid #5cb85c;
-}
-
-.collapsible .expand {
-    cursor: pointer;
-    font-weight: bold; 
-}
-
-.collapsible .sub-list {
-    display: none; 
-    padding-left: 20px;
-}
-
-.collapsible .sub-list li {
-    font-weight: normal;
-}
-
-.collapsible > li > .expand::before {
-    content: '▶ ';
-    font-size: 0.8em;
-    margin-right: 5px;
-}
-
-.collapsible > li .sub-list::before {
-    content: '▼ ';
-    font-size: 0.8em;
-    margin-right: 5px;
 }
 
 #content {
     padding: 1rem;
     flex-grow: 1;
+}
+
+.chartButton, .annotationsButton{
+    background-color: #ccc;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+/* Green background color for selected button */
+.green-background {
+    background-color: green;
+}
+
+.chartButton.active {
+    background-color: #4CAF50;
+    color: white;
 }
 
 footer {
@@ -143,4 +142,81 @@ footer img {
 .selected-flag {
     margin-right: 0.5rem;
     font-size: 20px;
+}
+
+.select-container {
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+.custom-select {
+    background-color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    width: 200px;
+    position: relative;
+}
+
+.custom-select::after {
+    content: '▼';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    pointer-events: none;
+}
+
+.custom-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    border: 2px solid #fff;
+    z-index: 999;
+    border-radius: 0 0 4px 4px;
+}
+
+.custom-options div {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.custom-options div:hover {
+    background-color: #333;
+    cursor: pointer; 
+    color: #fff; 
+    border-left: 5px solid #5cb85c;
+}
+
+
+/* Flag code */
+/* Ensure custom select options and the current option have enough space for the flag images */
+.custom-select .current-option, .custom-options div {
+    display: flex;
+    align-items: center;
+}
+
+/* Style for the flag images */
+.custom-select img {
+    margin-left: 5px; /* Add a little space between the flag and the country name */
+    width: 20px; /* Control the width of the image */
+    height: auto; /* Ensure the aspect ratio of the flag is maintained */
+}
+
+/* Adjust padding and height of the options to ensure visual consistency */
+.custom-options div {
+    padding: 10px;
+    min-height: 40px; /* Adjust based on the actual size of your flags to prevent distortion */
+}
+
+/* Hover state for options with images */
+.custom-options div:hover {
+    padding-left: 15px; /* Adjust padding to accommodate the border change on hover */
 }

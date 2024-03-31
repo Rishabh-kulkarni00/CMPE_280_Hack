@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat with GPT</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/openai.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <header>
         <div class="logo-container">
             <img src="{{ url_for('static', filename='images/UNICEF_logo_2.png') }}" alt="Logo" class="header-logo">
         </div>
-        <h2>Macroeconomic Researcher Food Security Time Series and Large Language Chat GPT Dashboard</h2>
+        <h3>Macroeconomic Researcher Food Security Time Series and Large Language Chat GPT Dashboard</h3>
     </header>
     <main>
+        <aside>
+            <nav>
+                <ul class="sidebar">
+                    <li><a href="/dashboard">Back to Dashboard</a></li>
+                </ul>
+            </nav>
+        </aside>
         <section id="content">
             <div id="chat-interface">
                 <div id="chat-box">

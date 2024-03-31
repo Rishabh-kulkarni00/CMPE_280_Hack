@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>India Graphs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      .container {
+          display: flex;
+          flex-direction: row;
+      }
+
+      aside {
+          flex: 0.5;
+      }
+
+      .main-content {
+          flex: 3;
+          background-color: #333;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .dashboard-div {
+          border: 1px solid #ccc;
+          margin-bottom: 20px;
+      }
+
+      header {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        flex-direction: column;
+      }
+
+      footer {
+        position: relative; 
+        width: 100%;
+        height: 55px; 
+        text-align: center;
+    }
+  </style>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart', 'controls']});
+      google.charts.setOnLoadCallback(drawDashboard);
+
+      function drawDashboard() {
+        // Create our data table for GDP.
+        var data1 = google.visualization.arrayToDataTable([
+          // ... Your GDP data rows
+          ['Year', 'GDP (current US$)'],
+              [1960.0, 37029883875.0],
+              [1961.0, 39232435784.0],
+              [1962.0, 42161481859.0],
+              [1963.0, 48421923459.0],
+              [1964.0, 56480289941.0],
+              [1965.0, 59554854575.0],
+              [1966.0, 45865462034.0],
+              [1967.0, 50134942203.0],
+              [1968.0, 53085455871.0],
+              [1969.0, 58447995017.0],
+              [1970.0, 62422483055.0],
+              [1971.0, 67350988021.0],
+              [1972.0, 71463193830.0],
+              [1973.0, 85515269586.0],
+              [1974.0, 99525899116.0],
+              [1975.0, 98472796457.0],
+              [1976.0, 102717000000.0],
+              [1977.0, 121487000000.0],
+              [1978.0, 137300000000.0],
+              [1979.0, 152992000000.0],
+              [1980.0, 186325000000.0],
+              [1981.0, 193491000000.0],
+              [1982.0, 200715000000.0],
+              [1983.0, 218262000000.0],
+              [1984.0, 212158000000.0],
+              [1985.0, 232512000000.0],
+              [1986.0, 248986000000.0],
+              [1987.0, 279034000000.0],
+              [1988.0, 296589000000.0],
+              [1989.0, 296042000000.0],
+              [1990.0, 320979000000.0],
+              [1991.0, 270105000000.0],
+              [1992.0, 288208000000.0],
+              [1993.0, 279296000000.0],
+              [1994.0, 327276000000.0],
+              [1995.0, 360282000000.0],
+              [1996.0, 392897000000.0],
+              [1997.0, 415868000000.0],
+              [1998.0, 421351000000.0],
+              [1999.0, 458820000000.0],
+              [2000.0, 468395000000.0],
+              [2001.0, 485441000000.0],
+              [2002.0, 514938000000.0],
+              [2003.0, 607699000000.0],
+              [2004.0, 709149000000.0],
+              [2005.0, 820382000000.0],
+              [2006.0, 940260000000.0],
+              [2007.0, 1216740000000.0],
+              [2008.0, 1198900000000.0],
+              [2009.0, 1341890000000.0],
+              [2010.0, 1675620000000.0],
+              [2011.0, 1823050000000.0],
+              [2012.0, 1827640000000.0],
+              [2013.0, 1856720000000.0],
+              [2014.0, 2039130000000.0],
+              [2015.0, 2103590000000.0],
+              [2016.0, 2294800000000.0],
+              [2017.0, 2651470000000.0],
+              [2018.0, 2701110000000.0],
+              [2019.0, 2870500000000.0],
+              [2020.0, 2622980000000.0]
+        ]);
+
+        // Create our data table for FDI Inflows.
+        var data2 = google.visualization.arrayToDataTable([
+          // ... Your FDI Inflows data rows
+          ['Year', 'Foreign direct investment, net inflows (% of GDP)'],
+          [1969.0, 0.072826324],
+              [1970.0, 0.070763624],
+              [1971.0, 0.024893934],
+              [1972.0, 0.044331264],
+              [1973.0, 0.057241382],
+              [1974.0, -0.010486395],
+              [1975.0, -0.007502573],
+              [1976.0, -0.029682109],
+              [1977.0, 0.0131755],
+              [1978.0, 0.03174683],
+              [1979.0, 0.042484827],
+              [1980.0, 0.047506181],
+              [1981.0, 0.03591159],
+              [1982.0, 0.002584047],
+              [1983.0, 0.009068703],
+              [1984.0, 0.045627777],
+              [1985.0, 0.047283784],
+              [1986.0, 0.076091199],
+              [1987.0, 0.030766482],
+              [1988.0, 0.085156734],
+              [1989.0, 0.073740021],
+              [1990.0, 0.02722554],
+              [1991.0, 0.095941829],
+              [1992.0, 0.197056163],
+              [1993.0, 0.297385909],
+              [1994.0, 0.594986258],
+              [1995.0, 0.617479056],
+              [1996.0, 0.860208566],
+              [1997.0, 0.625285966],
+              [1998.0, 0.472644846],
+              [1999.0, 0.765212649],
+              [2000.0, 1.056378305],
+              [2001.0, 1.011571805],
+              [2002.0, 0.605889255],
+              [2003.0, 0.765601405],
+              [2004.0, 0.88610072],
+              [2005.0, 2.130168425],
+              [2006.0, 2.073395746],
+              [2007.0, 3.620521897],
+              [2008.0, 2.651593127],
+              [2009.0, 1.635034274],
+              [2010.0, 2.002065552],
+              [2011.0, 1.312934337],
+              [2012.0, 1.516275965],
+              [2013.0, 1.695658786],
+              [2014.0, 2.092115758],
+              [2015.0, 1.937363198],
+              [2016.0, 1.507316581],
+              [2017.0, 1.559263523],
+              [2018.0, 1.763127508]
+        ]);
+
+        var data3 = google.visualization.arrayToDataTable([
+          // ... Your FDI Outflow data rows
+              ['Year', 'Foreign direct investment, net outflows (BoP, current US$)'],
+              [1974.0, 0.0],
+              [1975.0, 0.0],
+              [1976.0, 0.0],
+              [1977.0, 0.0],
+              [1978.0, 0.0],
+              [1979.0, 4000000.0],
+              [1980.0, 2000000.0],
+              [1981.0, 1000000.0],
+              [1982.0, 5000000.0],
+              [1983.0, 4000000.0],
+              [1984.0, 3000000.0],
+              [1985.0, -1000000.0],
+              [1986.0, 5000000.0],
+              [1987.0, 11000000.0],
+              [1988.0, 10000000.0],
+              [1989.0, 6000000.0],
+              [1990.0, -11000000.0],
+              [1991.0, 24000000.0],
+              [1992.0, 350640.5619],
+              [1993.0, 82583302.7],
+              [1994.0, 117189079.2],
+              [1995.0, 239324706.5],
+              [1996.0, 112918990.4],
+              [1997.0, 47593027.49],
+              [1998.0, 79357457.32],
+              [1999.0, 509532974.7],
+              [2000.0, 1054132218.0],
+              [2001.0, 1261071115.0],
+              [2002.0, 1237846245.0],
+              [2003.0, 1837062923.0],
+              [2004.0, 2640754960.0],
+              [2005.0, 14036833332.0],
+              [2006.0, 17026111929.0],
+              [2007.0, 19256527246.0],
+              [2008.0, 16095583747.0],
+              [2009.0, 15968099288.0],
+              [2010.0, 12607994610.0],
+              [2011.0, 8553237671.0],
+              [2012.0, 1764948800.0],
+              [2013.0, 11686480933.0],
+              [2014.0, 7514275639.0],
+              [2015.0, 5047292606.0],
+              [2016.0, 11090150305.0],
+              [2017.0, 11417789536.0],
+              [2018.0, 13140702032.0],
+              [2019.0, 11122667604.0]
+            ]);
+
+        // Create a dashboard.
+        var dashboard1 = new google.visualization.Dashboard(document.getElementById('dashboard_div1'));
+        var dashboard2 = new google.visualization.Dashboard(document.getElementById('dashboard_div2'));
+        var dashboard3 = new google.visualization.Dashboard(document.getElementById('dashboard_div3'));
+
+        // Create a range slider, passing some options for GDP
+        var slider1 = new google.visualization.ControlWrapper({
+          'controlType': 'NumberRangeFilter',
+          'containerId': 'filter_div1',
+          'options': {
+            'filterColumnLabel': 'Year',
+            'ui': {'labelStacking': 'vertical', 'label': 'Year Range:', 'format': {'pattern': '####'}}
+          }
+        });
+
+        // Create a range slider, passing some options for FDI Inflows
+        var slider2 = new google.visualization.ControlWrapper({
+          'controlType': 'NumberRangeFilter',
+          'containerId': 'filter_div2',
+          'options': {
+            'filterColumnLabel': 'Year',
+            'ui': {'labelStacking': 'vertical', 'label': 'Year Range:', 'format': {'pattern': '####'}}
+          }
+        });
+
+        // Create a line chart for GDP
+        var chart1 = new google.visualization.ChartWrapper({
+          'chartType': 'LineChart',
+          'containerId': 'chart_div1',
+          'options': {
+            'title': 'GDP (current US$)',
+            'width': 900,
+            'height': 300,
+            'legend': 'none',
+            'chartArea': {'width': '80%', 'height': '70%'}
+          }
+        });
+
+        // Create a line chart for FDI Inflows
+        var chart2 = new google.visualization.ChartWrapper({
+          'chartType': 'LineChart',
+          'containerId': 'chart_div2',
+          'options': {
+            'title': 'Foreign direct investment, net inflows (% of GDP)',
+            'width': 900,
+            'height': 300,
+            'legend': 'none',
+            'chartArea': {'width': '80%', 'height': '70%'}
+          }
+        });
+
+        // Create a range slider, passing some options for FDI Outflows
+        var slider3 = new google.visualization.ControlWrapper({
+          'controlType': 'NumberRangeFilter',
+          'containerId': 'filter_div3',
+          'options': {
+            'filterColumnLabel': 'Year',
+            'ui': {'labelStacking': 'vertical', 'label': 'Year Range:', 'format': {'pattern': '####'}}
+          }
+        });
+
+        // Create a line chart for FDI Outflows
+        var chart3 = new google.visualization.ChartWrapper({
+          'chartType': 'LineChart',
+          'containerId': 'chart_div3',
+          'options': {
+            'title': 'Foreign direct investment, net outflows (BoP, current US$)',
+            'width': 900,
+            'height': 300,
+            'legend': 'none',
+            'chartArea': {'width': '80%', 'height': '70%'}
+          }
+        });
+
+        // Bind the slider to the GDP chart
+        dashboard1.bind(slider1, chart1);
+            dashboard1.draw(data1);
+
+            dashboard2.bind(slider2, chart2);
+            dashboard2.draw(data2);
+
+            dashboard3.bind(slider3, chart3);
+            dashboard3.draw(data3);
+      }
+    </script>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/UNICEF_logo_2.png') }}" alt="Logo" class="header-logo">
+    </div>
+    <h3>Macroeconomic Researcher Food Security Time Series and Large Language Chat GPT Dashboard</h3>
+  </header>
+  <div class="container">
+    <aside>
+        <nav>
+            <ul class="sidebar">
+                <li><a href="/dashboard">Back to Dashboard</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="main-content">
+        <div id="dashboard_div1" class="dashboard-div">
+            <div id="filter_div1"></div>
+            <div id="chart_div1"></div>
+        </div>
+        <div id="dashboard_div2" class="dashboard-div">
+            <div id="filter_div2"></div>
+            <div id="chart_div2"></div>
+        </div>
+        <div id="dashboard_div3" class="dashboard-div">
+            <div id="filter_div3"></div>
+            <div id="chart_div3"></div>
+        </div>
+    </div>
+</div>
+  <footer>
+    <a href="{{ url_for('openai_chat') }}">
+        <img src="{{ url_for('static', filename='images/chat_gpt_logo.jpg') }}" alt="ChatGPT Logo" class="footer-logo">
+    </a>
+</footer>
+</body>
+</html>

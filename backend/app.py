@@ -4,7 +4,7 @@ from openai import OpenAI
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-openai = OpenAI(api_key='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')
+openai = OpenAI(api_key='placeholder')
 
 @app.route('/')
 def landing():
@@ -43,9 +43,14 @@ def openai_process_chat():
     assistant_message = response.choices[0].message.content
     return jsonify({'response': assistant_message})
 
-@app.route('/chart-analytics')
-def chart_analytics():
-    return render_template('chart_analytics.html')
+@app.route('/import_export')
+def import_export():
+    return render_template('import_export.html')
+
+@app.route('/get_content/<country_code>/<category>')
+def get_content(country_code, category):
+    template_name = f"{country_code}_{category}.html"
+    return render_template(template_name)
 
 if __name__ == '__main__':
     app.run(debug=True)
